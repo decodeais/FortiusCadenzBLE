@@ -1,15 +1,15 @@
 # Tacx Trainer Cadence Sensor Pulse Generator
 
 This Arduino program is designed to generate cadence pulses required for operating the Tacx bike trainer from the cadence sensor of your bicycle. The generated cadence pulses are output through a cable with a jack plug.
-![image](cadenz.png)
+![pic1](cadenz.png)
 ## Features
 
-- Connects to a Bluetooth Low Energy (BLE) cadence sensor.
-- Monitors the sensor for cadence data.
-- Generates cadence pulses based on the revolutions detected.
+- Connects to a Bluetooth Low Energy (BLE) cadence sensor (LED flashes fast).
+- Monitors the sensor for cadence data on the Serial Monitor.
+- Generates cadence pulses based on the revolutions detected at GPIO10 .
 - Outputs cadence pulses on GPIO10.
-- Provides visual feedback with a built-in LED.
-- Long press functionality to reset the sensor.
+- Provides visual feedback with a built-in LED (flashes for every pulse) .
+- Long press functionality to reset the sensor connection for new BLE scan.
 
 ## Pin Configuration
 
