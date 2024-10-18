@@ -61,7 +61,7 @@ void loop() {
     if (cadence_periph.advertisedServiceUuid().equals(CADENCE_SERVICE_UUID)) {
       BLE.stopScan();
       isScanning = false;               // Stop fast LED blinking
-      digitalWrite(LED_PIN, LOW);       // Turn off the LED
+      digitalWrite(LED_PIN, HIGH);       // Turn off the LED
 
       // Save the sensor's MAC address if this is the first connection
       if (savedSensorAddress == "") {
@@ -102,7 +102,7 @@ void blinkLedDuringScan() {
       lastLedToggleTime = currentMillis;  // Reset time for the next blink
     }
   } else {
-    digitalWrite(LED_PIN, LOW);  // Turn off LED when not scanning
+    digitalWrite(LED_PIN, HIGH);  // Turn off LED when not scanning
   }
 }
 
@@ -197,10 +197,12 @@ void monitorSensor(BLEDevice cadence_periph) {
     if (cadenceTime != 0) {
       CadFrqz = CadFrqz * 0.95 + 0.05 * 120000.0 / (cadenceTime_old + cadenceTime);
       cadenceTime_old = cadenceTime;
+      printf("Cadence: %3.2f \n",CadFrqz);
+
     }
 
     if (pulseDiff > 60000.0 / CadFrqz) {
-      digitalWrite(LED_PIN, HIGH);
+      digitalWrite(LED_PIN, LOW);
        // Output cadence pulse to GPIO10
       digitalWrite(CADENCE_OUTPUT_PIN, HIGH);
       lastPulseTime = millis();
@@ -208,7 +210,7 @@ void monitorSensor(BLEDevice cadence_periph) {
     }
 
     if (millis() - lastPulseTime > 100) {
-      digitalWrite(LED_PIN, LOW);
+      digitalWrite(LED_PIN, HIGH);
       digitalWrite(CADENCE_OUTPUT_PIN, LOW);
     }
 
